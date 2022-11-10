@@ -1,0 +1,16 @@
+*{
+    font-family: 'Lato', sans-serif;
+}
+#container{
+    margin-top: 25px;
+}
+
+tr{
+    text-align: center;
+}
+
+.crud{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}

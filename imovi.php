@@ -1,3 +1,12 @@
+<?php
+    
+include "conexao.php";
+
+$buscar_casas = "SELECT * FROM imoveis_1";
+$query_casas = mysqli_query($conection, $buscar_casas);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,16 +24,55 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!-- CSS do projeto -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- JavaScript Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <style type="text/css">
+
+    #container{
+    margin-top: 25px;
+    }
+
+    tr{
+    text-align: center;
+    
+    }
+
+    .crud{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    }
+
+    #btn{
+        border-radius: 7px;
+        font-size: 18px;
+    }
+
+    #imagem{
+        object-fit: cover;
+        width: 100%;
+    }
+
+    #espaço{
+        margin-top: 30px;
+    }
+
+    #featured-images .col-md-4{
+    position: relative;
+    cursor: pointer;
+}
+
+
+    
+    </style>
 </head>
 <body>
     <!--NAVBAR -->
     <nav class="navbar navbar-expand-lg fixed-top bg-primary-color" id="navbar">
       <div class="container py-3">
         <a href="#" class="navbar-brand primary-color">
-            <img src="img/imovi-icon.png" alt="iMovi">
+            <img src="imagem/imovi-icon.png" alt="iMovi">
             <span>iMovi</span>
         </a>
         <button
@@ -36,19 +84,10 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link active primary-color" aria-current="page">Home</a>
                 </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link primary-color">Projetos</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link primary-color">Imóveis</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link primary-color">Contatos</a>
-                </li>
             </ul>
+            <div>
+                <a href="login.html"><button class="links">Login</button></a>
+            </div>
         </div>
       </div>
     </nav>
@@ -64,21 +103,21 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="img/banner-1.jpg" alt="Casa 1" class="d-block w-100">
+                    <img src="imagem/banner-1.jpg" alt="Casa 1" class="d-block w-100">
                     <div class="carousel-caption">
                         <h5>Casas planejadas</h5>
                         <a href="#" class="btn btn-dark">Ver Projetos</a>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="img/banner-2.jpg" alt="Casa 2" class="d-block w-100">
+                    <img src="imagem/banner-2.jpg" alt="Casa 2" class="d-block w-100">
                     <div class="carousel-caption">
                         <h5>Projetos Complexos</h5>
                         <a href="#" class="btn btn-dark">Ver Projetos</a>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="img/banner-3.jpg" alt="Casa 3" class="d-block w-100">
+                    <img src="imagem/banner-3.jpg" alt="Casa 3" class="d-block w-100">
                     <div class="carousel-caption">
                         <h5>Projetos Inovadores</h5>
                         <a href="#" class="btn btn-dark">Ver Projetos</a>
@@ -140,57 +179,107 @@
     <!-- DESTAQUES -->
     <div class="container" id="featured-container">
         <div class="col-12">
-            <h2 class="title primary-color">Trabalhos em Destaque</h2>
+            <h2 class="title primary-color">Projetos inseridos por clientes</h2>
             <p class="subtitle secondary-color">
-                Conheça nossos projetos mais desafiadores
+                Cadastre um abaixo para apresentar aqui!
             </p>
         </div>
         <div class="col-12" id="featured-images">
             <div class="row g-4">
+                <!-- Onde VAI RECEBER WHILE -->
+                <?php
+                  while($receber_casas = mysqli_fetch_array($query_casas)){
+
+                  $id = $receber_casas['id'];
+                  $nome = $receber_casas['nome'];
+                  $categoria = $receber_casas['categoria'];
+                  $imagem = $receber_casas['imagem']; 
+
+                  ?>
                 <div class="col-12 col-md-4">
-                    <img src="img/project-1.jpg" alt="Projeto 1" class="img-fluid">
+                    <img src="<?php echo $imagem; ?>" alt="Projeto 1" class="img-fluid">
                     <div class="banner-content">
-                        <p class="secoondary-color">Categoria</p>
-                        <h3>Nome do Projeto</h3>
+                        <p class="secoondary-color"><?php echo $categoria; ?></p>
+                        <h3><?php echo $nome; ?></h3>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
-                    <img src="img/project-2.jpg" alt="Projeto 2" class="img-fluid">
-                    <div class="banner-content">
-                        <p class="secoondary-color">Categoria</p>
-                        <h3>Nome do Projeto</h3>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <img src="img/project-3.jpg" alt="Projeto 3" class="img-fluid">
-                    <div class="banner-content">
-                        <p class="secoondary-color">Categoria</p>
-                        <h3>Nome do Projeto</h3>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <img src="img/project-4.jpg" alt="Projeto 4" class="img-fluid">
-                    <div class="banner-content">
-                        <p class="secoondary-color">Categoria</p>
-                        <h3>Nome do Projeto</h3>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <img src="img/project-5.jpg" alt="Projeto 5" class="img-fluid">
-                    <div class="banner-content">
-                        <p class="secoondary-color">Categoria</p>
-                        <h3>Nome do Projeto</h3>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <img src="img/project-6.jpg" alt="Projeto 6" class="img-fluid">
-                    <div class="banner-content">
-                        <p class="secoondary-color">Categoria</p>
-                        <h3>Nome do Projeto</h3>
-                    </div>
-                </div>
+                <!-- ONDE VAI FECHAR A REPETIÇAO -->
+                <?php
+
+                };
+
+                ?>
             </div>
         </div>
+        
+        <div id="espaço" class="col-12">
+                <h2 class="title primary-color">Cadastre os Imóveis do seu gosto!</h2>
+                <p class="subtitle secondary-color">
+                Nos campos abaixo coloque o seu nome, categotia (exemplo: apartamento) e uma URL da imagem que deseja inseir! 
+            </p>
+
+            <div class="container" id="container">
+            <?php
+    
+             include "conexao.php";
+    
+                $buscar_casas = "SELECT * FROM imoveis_1";
+                $query_casas = mysqli_query($conection, $buscar_casas);
+                
+            ?>
+        <table class="table" >
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NOME</th>
+            <th scope="col">CATEGORIA</th>
+            <th scope="col">IMAGEM</th>
+            <th scope="col">AÇÕES</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+        <?php
+                while($receber_casas = mysqli_fetch_array($query_casas)){
+
+                  $id = $receber_casas['id'];
+                  $nome = $receber_casas['nome'];
+                  $categoria = $receber_casas['categoria'];
+                  $imagem = $receber_casas['imagem'];
+            ?>
+
+            <tr>
+            <form action="editar_casa.php" method="post">
+            <th scope="row"><?php echo $id; ?></th>
+            <td><input type="text" name="nome" value="<?php echo $nome; ?>"></td>
+            <td><input type="text" name="categoria" value="<?php echo $categoria; ?>"></td>
+            <td><input type="text" name="imagem" value="<?php echo $imagem; ?>"></td>
+            <td class="crud">
+              <input type="submit" id="btn" class="btn btn-primary" value= "Editar">
+              <input type="hidden" name="id" value="<?php echo $id; ?>">
+            </form>
+            <form action="excluir_casa.php" method="post">
+            <input type="submit" id="btn" class="btn btn-danger" value="Excluir">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                </form>
+            </td>
+              </tr>
+              <?php
+
+                };
+
+              ?>
+              <tr>
+              <form >
+             <td></td>
+             <td><input id="nome" type="text" placeholder="Nome" /> </td>
+             <td><input id="categoria" type="text" placeholder="Categoria" /></td>
+             <td><input id="imagem" type="text" placeholder="Imagem" /></td>
+             <td><button id="btn" class="btn btn-success" onclick="cadastro()">Cadastrar</button></td>
+          </form>
+              </tr>
+        </tbody>
+      </table>
     </div>
     <!-- INFO -->
     <div class="container" id="info-container">
@@ -203,7 +292,7 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-12 col-md-5" id="info-banner">
-                    <img src="img/infobanner.jpg" alt="Informações da Empresa" class="img-fluid">
+                    <img src="imagem/infobanner.jpg" alt="Informações da Empresa" class="img-fluid">
                 </div>
                 <div class="col-12 col-md-7 bg-secondary-color" id="info-content">
                     <div class="row">
@@ -309,5 +398,6 @@
             </div>
         </div>
     </footer>
+    <script src="cadastrar_casa.js"></script>
 </body>
 </html>
