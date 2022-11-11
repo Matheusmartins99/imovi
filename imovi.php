@@ -29,10 +29,6 @@ $query_casas = mysqli_query($conection, $buscar_casas);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <style type="text/css">
 
-    #container{
-    margin-top: 25px;
-    }
-
     tr{
     text-align: center;
     
@@ -56,12 +52,18 @@ $query_casas = mysqli_query($conection, $buscar_casas);
 
     #espaço{
         margin-top: 30px;
+        overflow: auto;
+    
     }
-
+  
     #featured-images .col-md-4{
     position: relative;
     cursor: pointer;
-}
+    }
+
+    #footer{
+        margin: 0;
+    }
 
 
     
@@ -181,7 +183,7 @@ $query_casas = mysqli_query($conection, $buscar_casas);
         <div class="col-12">
             <h2 class="title primary-color">Projetos inseridos por clientes</h2>
             <p class="subtitle secondary-color">
-                Cadastre um abaixo para apresentar aqui!
+                Cadastre um imóvel abaixo para apresentar aqui!
             </p>
         </div>
         <div class="col-12" id="featured-images">
@@ -196,7 +198,7 @@ $query_casas = mysqli_query($conection, $buscar_casas);
                   $imagem = $receber_casas['imagem']; 
 
                   ?>
-                <div class="col-12 col-md-4">
+                <div  class="col-12 col-md-4">
                     <img src="<?php echo $imagem; ?>" alt="Projeto 1" class="img-fluid">
                     <div class="banner-content">
                         <p class="secoondary-color"><?php echo $categoria; ?></p>
@@ -218,7 +220,7 @@ $query_casas = mysqli_query($conection, $buscar_casas);
                 Nos campos abaixo coloque o seu nome, categotia (exemplo: apartamento) e uma URL da imagem que deseja inseir! 
             </p>
 
-            <div class="container" id="container">
+            <div class="container" id="container-table">
             <?php
     
              include "conexao.php";
@@ -347,7 +349,7 @@ $query_casas = mysqli_query($conection, $buscar_casas);
                     <div class="row">
                         <div class="col-12 col-md-4" id="news-container">
                             <h4>Fique por dentro das novidades</h4>
-                            <p class="secondary-color">Inscreva-se para saber em primeira mão</p>
+                            <p class="secondary-color">Inscreva-se para receber novidades</p>
                             <form>
                                 <div class="mb-3">
                                     <input type="email" class="form-control" placeholder="Digite o seu e-mail">
